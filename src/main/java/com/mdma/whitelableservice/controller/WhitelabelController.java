@@ -29,8 +29,8 @@ public class WhitelabelController {
     }
 
     @GetMapping("/get/{restaurantId}")
-    public Whitelabel getWhitelabelFromRestaurant(@PathVariable String id) {
-        return whitelabelService.GetWhiteLabelWithRestaurantId(id);
+    public Whitelabel getWhitelabelFromRestaurant(@PathVariable String restaurantId) {
+        return whitelabelService.GetWhiteLabelWithRestaurantId(restaurantId);
     }
 
     @PutMapping("update")

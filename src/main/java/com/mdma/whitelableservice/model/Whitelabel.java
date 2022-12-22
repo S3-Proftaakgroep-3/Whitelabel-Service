@@ -9,9 +9,9 @@ public class Whitelabel {
     @Id
     private String id;
     private String restaurantId;
+
     private String backgroundColour;
-    private String buttonColour;
+    private String primaryColour;
     private String textColour;
-    private String accentColour;
-    private String logoString;
+    private String imageString;
 }

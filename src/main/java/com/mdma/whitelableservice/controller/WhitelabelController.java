@@ -34,8 +34,8 @@ public class WhitelabelController {
     }
 
     @PutMapping("update")
-    public ResponseEntity<String> updateWhitelabel(@RequestParam String restaurantId, @RequestBody Whitelabel whitelabel) {
-        return whitelabelService.UpdateWhitelabelByRestaurantId(restaurantId, whitelabel);
+    public ResponseEntity<String> updateWhitelabel(@RequestBody Whitelabel whitelabel) {
+        return whitelabelService.UpdateWhitelabelByRestaurantId(whitelabel);
 
     }
 }

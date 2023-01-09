@@ -32,8 +32,8 @@ public class WhitelabelService {
         return repository.findByRestaurantId(id);
     }
 
-    public ResponseEntity<String> UpdateWhitelabelByRestaurantId(String restaurantId, Whitelabel whitelabel) {
-        if (repository.findByRestaurantId(restaurantId) != null) {
+    public ResponseEntity<String> UpdateWhitelabelByRestaurantId(Whitelabel whitelabel) {
+        if (repository.findByRestaurantId(whitelabel.getRestaurantId()) != null) {
             if (repository.save(whitelabel) == whitelabel) {
                 return new ResponseEntity<>("whitelabel has been saved", HttpStatus.OK);
             } else

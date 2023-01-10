@@ -33,15 +33,23 @@ public class WhitelabelService {
     }
 
     public ResponseEntity<String> UpdateWhitelabelByRestaurantId(Whitelabel whitelabel) {
-        if (repository.findByRestaurantId(whitelabel.getRestaurantId()) != null) {
-            if (repository.save(whitelabel) == whitelabel) {
-                return new ResponseEntity<>("whitelabel has been saved", HttpStatus.OK);
-            } else
-                return new ResponseEntity<>("Whitelabel failed to update", HttpStatus.BAD_REQUEST);
+        //Get whitelabel that needs update
+        var whitelabelToUpdate = repository.findByRestaurantId(whitelabel.getRestaurantId());
 
+        //Check if this whitelabel is present
+        if (whitelabelToUpdate != null) {
+            //Save new instance of whitelabel in database and check if it is the same as the send restaurant in the body
+            if (repository.save(whitelabel) == whitelabel) {
+                //Remove old instance of whitelabel, so it won't be doubled
+                repository.delete(whitelabelToUpdate);
+                //Give response back with call
+                return new ResponseEntity<>("whitelabel has been updated", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Whitelabel failed to update", HttpStatus.BAD_REQUEST);
+            }
         } else {
-            return new ResponseEntity<>("Whitelabel has not been updated: Whitelabel not found",
-                    HttpStatus.BAD_REQUEST);
+            //Whitelabel not found so give back message
+            return new ResponseEntity<>("Whitelabel has not been updated: Whitelabel not found", HttpStatus.BAD_REQUEST);
         }
     }
 
